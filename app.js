@@ -21,6 +21,8 @@ function handleSubmit(event) {
 
     // create a new drink
 
+
+
     let newDrink = new Drink(drinkName, ingredientsArr, image, cold, hot, price);
     newDrink.render();
     newDrink.renderTable();
