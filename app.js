@@ -2,7 +2,7 @@
 let sectionEl = document.getElementById("cardSection");
 let formEl = document.getElementById("formId");
 let allDrinks = [];
-let tableEl = document.getElementById("tableId");
+let tableEl = document.getElementById("tableID");
 formEl.addEventListener("submit", handleSubmit);
 
 function handleSubmit(event) {
@@ -10,7 +10,7 @@ function handleSubmit(event) {
 
     event.preventDefault();
     // for text input
-    let drinkName = event.target.drinkName.value;
+    let drinkName = event.target.drinkName.value
     let ingredients = event.target.ingredients.value;
     let image = event.target.image.value;
     let price = event.target.price.value;
@@ -23,6 +23,7 @@ function handleSubmit(event) {
 
     let newDrink = new Drink(drinkName, ingredientsArr, image, cold, hot, price);
     newDrink.render();
+    newDrink.renderTable();
 
     saveData(allDrinks);
 }
@@ -74,23 +75,22 @@ Drink.prototype.renderTable = function () {
     let priceTd = document.createElement("td");
     priceTd.textContent = this.price;
     tr.appendChild(priceTd);
+    // fourth error
 }
 
-let latte = new Drink("Latte", ["milk", "ice", "sugar"], "./assets/latte.png", true, true, 1);
-let mocha = new Drink("mocha", ["milk", "coffee", "ice", "sugar"], "./assets/mocha.png", true, false, 2);
-let hotChocalte = new Drink("hot chocalte", ["milk", "coffee", "ice", "sugar"], "./assets/mocha.png", true, false, 2);
-let espresso=new Drink("espresso", ["milk", "coffee", "ice", "sugar"], "", true, false, 2);
+let latte = new Drink("Latte", ["milk", "ice", "sugar"], "https://raw.githubusercontent.com/LTUC/new-prep-course-std/main/Day14/Task/assets/latte.png", true, true, 1);
+let mocha = new Drink("mocha", ["milk", "coffee", "ice", "sugar"], "https://raw.githubusercontent.com/LTUC/new-prep-course-std/main/Day14/Task/assets/mocha.png", true, false, 2);
+let hotChocalte = new Drink("hot chocalte", ["milk", "coffee", "ice", "sugar"], "https://raw.githubusercontent.com/LTUC/new-prep-course-std/main/Day14/Task/assets/americano.png", true, false, 2)
+let espresso=new Drink("espresso", ["milk", "coffee", "ice", "sugar"], "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6fVE8zVbLUonYuYiHiSInfWANnv748xj0xg&usqp=CAU", true, false, 2);
 function renderAll() {
-
-    for (let i = allDrinks.lenght; i <= allDrinks.length; i++) {
+    console.log("all",allDrinks);
+    for (let i = 0; i <= allDrinks.length; i++) {
+        if (typeof(allDrinks[i]) != 'undefined') {
         allDrinks[i].render();
         allDrinks[i].renderTable();
     }
 }
-
-
-renderAll();
-console.log("drink",allDrinks);
+}
 
 
 // local storage:
@@ -99,7 +99,6 @@ function saveData(data) {
     let stringfiyData = JSON.stringify(data);
     localStorage.setItem("drinks", stringfiyData);
 }
-
 
 function getData() {
     let retrievedData = localStorage.getItem("drinks");
@@ -116,3 +115,6 @@ function getData() {
 }
 
 getData();
+
+
+
